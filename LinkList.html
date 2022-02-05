@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 10 500, 1 100, 2 200, 3 NuLL
+        // head = 1000
+        class Node {
+            constructor(data, next = null) {
+                this.data = data;
+                this.next = next;
+            }
+        }
+        class LinkList {
+            constructor() {
+                this.head = null;
+                this.size = 0;
+            }
+
+            addAtStart(data) {
+                this.head = new Node(data, this.head);
+                this.size++;
+            }
+
+            addAtEnd(data) {
+                let node = new Node(data);
+                if (!this.head) {
+                    this.head = node;
+                } else {
+                    let current = this.head;
+                    while (current.next) {
+                        current = current.next;
+                    }
+                    current.next = node;
+
+
+                }
+                this.size++;
+
+            }
+            addAtIndex(data, index) {
+                if (index > 0 && index > this.size) {
+                    return console.log('invalid index');
+
+                }
+                if (index == 0) {
+                    this.addAtStart(data);
+                    return;
+
+                }
+                let node = new Node(data);
+                let previous, current;
+                let count = 0;
+                current = this.head;
+                while (count < index) {
+                    count++;
+                    previous = current;
+                    current = current.next;
+
+
+                }
+                node.next = current;
+                previous.next = node;
+                this.size++;
+
+
+            }
+            removeAtFirst() {
+
+                let current = this.head;
+
+                if (this.head) {
+                    this.head = current.next;
+                }
+                this.size--;
+            }
+            removeAtLast() {
+
+                let current = this.head;
+                let previous = current;
+                while (current.next) {
+                    previous = current;
+                    current = current.next;
+                }
+                previous.next = current.next
+                this.size--;
+            }
+            removeAtIndex(index) {
+                if (index > 0 && index > this.size) {
+                    return console.log('invalid index');
+
+                }
+                if (index == 0) {
+                    this.removeAtFirst();
+                    return
+
+                } else {
+
+
+                    let current = this.head;
+                    let previous = current;
+                    let count = 0;
+                    while (count < index) {
+                        count++;
+                        previous = current;
+                        current = current.next;
+                    }
+                    previous.next = current.next
+                }
+                this.size--;
+            }
+
+            printList() {
+                let current = this.head;
+                while (current) {
+                    console.log(current.data, current.next, this.size);
+                    current = current.next;
+
+                }
+            }
+        }
+        let ll = new LinkList();
+        ll.addAtStart(10);
+        ll.addAtEnd(5);
+        ll.addAtIndex(3, 1);
+        // ll.removeAtFirst();
+        // ll.removeAtLast();
+        // ll.removeAtIndex(1);
+        ll.printList();
+    </script>
+</body>
+
+</html>
